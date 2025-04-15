@@ -68,9 +68,9 @@ void	equation_checker(int x, int y, t_mlx_data *data)
 	iter = 42;
 	z.x = 0;
 	z.y = 0;
-	c.x = change_range((float)x, -2.0, 2.0, 0, W);
+	c.x = change_range((float)x, -2.0, 2.0, 0, W * data->zoom);
 	// printf("%f\n", c.x);
-	c.y = change_range((float)y, -2.0, 2.0, 0, H);
+	c.y = change_range((float)y, -2.0, 2.0, 0, H * data->zoom);
 	// printf("yy %f\n", c.y);
 	while (i < iter)
 	{
@@ -101,6 +101,36 @@ void	rendering(t_mlx_data	*data)
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->mlx_img, 0, 0);
 }
+int	mouse(int button, int x, int y, t_mlx_data *data)
+{
+	// printf("%d\n", button);
+	if (button == 5)
+		data->zoom *= 0.9;
+	else if (button == 4)
+		data->zoom *= 1.1;
+	rendering(data);
+	return (0);
+}
+
+// int	close(int button, int x, int y, t_mlx_data *data)
+// {
+// 	printf("%d\n", button);
+// 	return (0);
+// }
+
+int	close(int keysym, t_mlx_data *data)
+{
+	// mlx_destroy_image(data->mlx_ptr, data->mlx_img);
+	// mlx_destroy_window(data->mlx_ptr, data->mlx_win);
+	// mlx_destroy_display(data->mlx_ptr);
+	// free(data->mlx_ptr);
+	exit(0);
+	return (0);
+}
+// void	events(t_mlx_data *data)
+// {
+// 	mlx_hook(data->mlx_win, keyPress, )
+// }
 
 int	main(int ac, char **av)
 {
@@ -113,10 +143,12 @@ int	main(int ac, char **av)
 		data.mlx_win = mlx_new_window(data.mlx_ptr, W, H, TITLE);
 		data.mlx_img = mlx_new_image(data.mlx_ptr, W, H);
 		data.addr = mlx_get_data_addr(data.mlx_img, &data.bpp, &data.len, &data.endian);
-	
+		data.zoom = 1.0;
+		mlx_hook(data.mlx_win, 2, 1L<<0, close, &data);
+		mlx_hook(data.mlx_win, 4, 1L<<2, mouse, &data);
+		mlx_hook(data.mlx_win, 17, 1L<<17, close, &data);
 		rendering(&data);
 		mlx_loop(data.mlx_ptr);
-
 	}
 
 
