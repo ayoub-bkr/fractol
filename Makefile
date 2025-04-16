@@ -1,11 +1,12 @@
 SRC = fractol_rest.c fractol.c main.c utils.c
 OBJ = $(SRC:.c=.o)
 FLAGS = -Wall -Wextra -Werror
-MLX_FLAGS = -lX11 -lXext -lmlx
+MINLIB_DIR = -L/usr/local/lib/ -lmlx
+X11_LIBS = -lX11 -lXext
 NAME = fractol
 
 $(NAME): $(OBJ)
-	cc $(FLAGS) $(OBJ) $(MLX_FLAGS)  -o $(NAME)
+	cc $(FLAGS) $(OBJ) $(MINLIB_DIR) ${X11_LIBS} -o $(NAME)
 
 all: $(NAME)
 

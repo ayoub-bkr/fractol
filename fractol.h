@@ -10,12 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
-#include <stdlib.h>
-#include <unistd.h>
-#define W 720
-#define H 720
-#define TITLE "Fract-ol"
+#ifndef FRACTOL_H
+# define FRACTOL_H
+# include <mlx.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
+# include <stdlib.h>
+# include <unistd.h>
+# define W 720
+# define H 720
+# define TITLE "Fract-ol"
 
 typedef struct s_complex
 {
@@ -42,6 +46,7 @@ typedef struct s_mlx_data
 
 // fractol_rest.c
 void			erroring(void);
+void			initialising(t_mlx_data *data);
 
 // fractol.c
 void			put_pixel(int x, int y, t_mlx_data *data, int color);
@@ -61,3 +66,5 @@ t_complex		sum(t_complex z1, t_complex z2);
 t_complex		square(t_complex z);
 int				ft_strcmp(char *s1, char *s2);
 double			ft_atod(char *str);
+
+#endif

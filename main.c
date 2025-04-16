@@ -65,10 +65,9 @@ int	main(int ac, char **av)
 {
 	t_mlx_data	data;
 
-	if ((ac == 2 && !ft_strcmp(av[1], "mandelbort")) || (ac == 4
-			&& !ft_strcmp(av[1], "julia")))
+	if ((ac == 2 && !ft_strcmp(av[1], "mandelbort"))
+		|| (ac == 4 && !ft_strcmp(av[1], "julia")))
 	{
-		data.zoom = 1;
 		if (!ft_strcmp(av[1], "mandelbort"))
 			data.type = 'm';
 		else
@@ -77,11 +76,7 @@ int	main(int ac, char **av)
 			data.julia_x = ft_atod(av[2]);
 			data.julia_y = ft_atod(av[3]);
 		}
-		data.mlx_ptr = mlx_init();
-		data.mlx_win = mlx_new_window(data.mlx_ptr, W, H, TITLE);
-		data.mlx_img = mlx_new_image(data.mlx_ptr, W, H);
-		data.addr = mlx_get_data_addr(data.mlx_img, &data.bpp, &data.len,
-				&data.endian);
+		initialising(&data);
 		mlx_key_hook(data.mlx_win, esc_event, &data);
 		mlx_hook(data.mlx_win, 4, 1L << 2, mouse_event, &data);
 		mlx_hook(data.mlx_win, 17, 1L << 17, x_event, &data);

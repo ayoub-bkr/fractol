@@ -19,3 +19,13 @@ void	erroring(void)
 	write(1, "./fractol julia <real> <imaginer> [-2, 2]", 42);
 	exit(1);
 }
+
+void	initialising(t_mlx_data *data)
+{
+	data->zoom = 1;
+	data->mlx_ptr = mlx_init();
+	data->mlx_win = mlx_new_window(data->mlx_ptr, W, H, TITLE);
+	data->mlx_img = mlx_new_image(data->mlx_ptr, W, H);
+	data->addr = mlx_get_data_addr(data->mlx_img, &data->bpp, &data->len,
+			&data->endian);
+}
