@@ -30,12 +30,12 @@ t_complex	square(t_complex z)
 	return (res);
 }
 
-int	ft_strncmp(char *s1, char *s2, int n)
+int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
 
 	i = 0;
-	while (i < n)
+	while (s1[i] || s2[i])
 	{
 		if (s1[i] > s2[i] || s1[i] < s2[i])
 			return (1);
@@ -44,29 +44,51 @@ int	ft_strncmp(char *s1, char *s2, int n)
 	return (0);
 }
 
+double	atod_calcul(double *res, double sign, char *str)
+{
+	double	rat;
+
+	rat = 1;
+	if (*str == '.')
+		erroring();
+	while (*str)
+	{
+		if (*str >= '0' && *str <= '9')
+		{
+			rat /= 10;
+			*res += (*str++ - 48) * rat;
+		}
+		else
+			erroring();
+	}
+	if (!(*res * sign < 2 && *res * sign > -2))
+		erroring();
+	return (*res * sign);
+}
+
 double	ft_atod(char *str)
 {
 	double	res;
 	double	sign;
-	double	rat;
 
 	res = 0;
 	sign = 1;
-	rat = 1;
+	while (*str == 32 || (*str >= 9 && *str == 13))
+		str++;
 	if (*str == '-' || *str == '+')
 		if (*str++ == '-')
 			sign *= -1;
+	if (*str == '-' || *str == '+')
+		erroring();
 	while (*str && *str != '.')
 	{
-		res = (res * 10) + *str - 48;
+		if (*str >= '0' && *str <= '9')
+			res = (res * 10) + *str - 48;
+		else
+			erroring();
 		str++;
 	}
 	if (*str == '.')
 		str++;
-	while (*str)
-	{
-		rat /= 10;
-		res += (*str++ - 48) * rat;
-	}
-	return (res * sign);
+	return (atod_calcul(&res, sign, str));
 }

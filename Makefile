@@ -1,11 +1,11 @@
-SRC = fractol.c main.c utils.c
+SRC = fractol_rest.c fractol.c main.c utils.c
 OBJ = $(SRC:.c=.o)
 FLAGS = -Wall -Wextra -Werror
-MLX_FLAGS = -Lminilibx-linux -lX11 -lXext -lmlx
+MLX_FLAGS = -lX11 -lXext -lmlx
 NAME = fractol
 
 $(NAME): $(OBJ)
-	cc $(FLAGS) $(OBJ) -Lminilibx-linux -lX11 -lXext -lmlx  -o $(NAME)
+	cc $(FLAGS) $(OBJ) $(MLX_FLAGS)  -o $(NAME)
 
 all: $(NAME)
 

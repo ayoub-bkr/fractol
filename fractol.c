@@ -52,9 +52,9 @@ void	equation_checker(int x, int y, t_mlx_data *data)
 
 	i = 0;
 	data->out = 4;
-	data->iter = 420;
-	z.x = mapping(x, 0, W * data->zoom);
-	z.y = mapping(y, 0, H * data->zoom);
+	data->iter = 142;
+	z.x = mapping(x, 0, W) * data->zoom;
+	z.y = mapping(y, 0, H) * data->zoom;
 	m_or_j(&c, &z, data);
 	while (i < data->iter)
 	{

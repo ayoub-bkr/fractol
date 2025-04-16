@@ -16,9 +16,9 @@ int	mouse_event(int keycode, int x, int y, t_mlx_data *data)
 {
 	(void)x;
 	(void)y;
-	if (keycode == 5)
+	if (keycode == 4)
 		data->zoom *= 0.9;
-	else if (keycode == 4)
+	else if (keycode == 5)
 		data->zoom *= 1.1;
 	rendering(data);
 	return (0);
@@ -65,9 +65,18 @@ int	main(int ac, char **av)
 {
 	t_mlx_data	data;
 
-	if ((ac == 2 && !ft_strncmp(av[1], "mandelbort", 10)) || (ac == 4
-			&& !ft_strncmp(av[1], "julia", 5)))
+	if ((ac == 2 && !ft_strcmp(av[1], "mandelbort")) || (ac == 4
+			&& !ft_strcmp(av[1], "julia")))
 	{
+		data.zoom = 1;
+		if (!ft_strcmp(av[1], "mandelbort"))
+			data.type = 'm';
+		else
+		{
+			data.type = 'j';
+			data.julia_x = ft_atod(av[2]);
+			data.julia_y = ft_atod(av[3]);
+		}
 		data.mlx_ptr = mlx_init();
 		data.mlx_win = mlx_new_window(data.mlx_ptr, W, H, TITLE);
 		data.mlx_img = mlx_new_image(data.mlx_ptr, W, H);
@@ -76,16 +85,9 @@ int	main(int ac, char **av)
 		mlx_key_hook(data.mlx_win, esc_event, &data);
 		mlx_hook(data.mlx_win, 4, 1L << 2, mouse_event, &data);
 		mlx_hook(data.mlx_win, 17, 1L << 17, x_event, &data);
-		data.zoom = 1;
-		if (!ft_strncmp(av[1], "mandelbort", 10))
-			data.type = 'm';
-		else
-		{
-			data.type = 'j';
-			data.julia_x = ft_atod(av[2]);
-			data.julia_y = ft_atod(av[3]);
-		}
 		rendering(&data);
 		mlx_loop(data.mlx_ptr);
 	}
+	else
+		erroring();
 }

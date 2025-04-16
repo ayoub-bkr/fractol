@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #include <mlx.h>
-#include <stdio.h>
 #include <stdlib.h>
-#define W 1080
+#include <unistd.h>
+#define W 720
 #define H 720
 #define TITLE "Fract-ol"
 
@@ -40,6 +40,9 @@ typedef struct s_mlx_data
 	double		julia_y;
 }				t_mlx_data;
 
+// fractol_rest.c
+void			erroring(void);
+
 // fractol.c
 void			put_pixel(int x, int y, t_mlx_data *data, int color);
 unsigned int	coloring(int i);
@@ -56,5 +59,5 @@ void			m_or_j(t_complex *c, t_complex *z, t_mlx_data *data);
 // util.c
 t_complex		sum(t_complex z1, t_complex z2);
 t_complex		square(t_complex z);
-int				ft_strncmp(char *s1, char *s2, int n);
+int				ft_strcmp(char *s1, char *s2);
 double			ft_atod(char *str);
