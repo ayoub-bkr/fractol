@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aboukent <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/16 20:16:00 by aboukent          #+#    #+#             */
+/*   Updated: 2025/04/16 20:16:03 by aboukent         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 t_complex	sum(t_complex z1, t_complex z2)
@@ -20,7 +32,7 @@ t_complex	square(t_complex z)
 
 int	ft_strncmp(char *s1, char *s2, int n)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < n)
@@ -58,8 +70,3 @@ double	ft_atod(char *str)
 	}
 	return (res * sign);
 }
-
-// int main()
-// {
-// 	printf("%f", ft_atod("-12.15"));
-// }

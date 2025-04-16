@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aboukent <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/16 20:15:33 by aboukent          #+#    #+#             */
+/*   Updated: 2025/04/16 20:15:34 by aboukent         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 int	mouse_event(int keycode, int x, int y, t_mlx_data *data)
@@ -22,7 +34,7 @@ int	x_event(t_mlx_data *data)
 	return (0);
 }
 
-int	esc_event(int keycode, t_mlx_data	*data)
+int	esc_event(int keycode, t_mlx_data *data)
 {
 	if (keycode == 65307)
 	{
@@ -51,18 +63,19 @@ void	m_or_j(t_complex *c, t_complex *z, t_mlx_data *data)
 
 int	main(int ac, char **av)
 {
-	if ((ac == 2 && !ft_strncmp(av[1], "mandelbort", 10))
-		|| (ac == 4 && !ft_strncmp(av[1], "julia", 5)))
-	{
-		t_mlx_data	data;
+	t_mlx_data	data;
 
+	if ((ac == 2 && !ft_strncmp(av[1], "mandelbort", 10)) || (ac == 4
+			&& !ft_strncmp(av[1], "julia", 5)))
+	{
 		data.mlx_ptr = mlx_init();
 		data.mlx_win = mlx_new_window(data.mlx_ptr, W, H, TITLE);
 		data.mlx_img = mlx_new_image(data.mlx_ptr, W, H);
-		data.addr = mlx_get_data_addr(data.mlx_img, &data.bpp, &data.len, &data.endian);
+		data.addr = mlx_get_data_addr(data.mlx_img, &data.bpp, &data.len,
+				&data.endian);
 		mlx_key_hook(data.mlx_win, esc_event, &data);
-		mlx_hook(data.mlx_win, 4, 1L<<2, mouse_event, &data);
-		mlx_hook(data.mlx_win, 17, 1L<<17, x_event, &data);
+		mlx_hook(data.mlx_win, 4, 1L << 2, mouse_event, &data);
+		mlx_hook(data.mlx_win, 17, 1L << 17, x_event, &data);
 		data.zoom = 1;
 		if (!ft_strncmp(av[1], "mandelbort", 10))
 			data.type = 'm';

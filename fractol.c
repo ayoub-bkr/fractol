@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aboukent <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/16 20:13:36 by aboukent          #+#    #+#             */
+/*   Updated: 2025/04/16 20:13:39 by aboukent         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 void	put_pixel(int x, int y, t_mlx_data *data, int color)
@@ -57,7 +69,7 @@ void	equation_checker(int x, int y, t_mlx_data *data)
 	put_pixel(x, y, data, 0xdddddd);
 }
 
-void	rendering(t_mlx_data	*data)
+void	rendering(t_mlx_data *data)
 {
 	int	x;
 	int	y;
