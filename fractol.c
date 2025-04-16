@@ -15,14 +15,19 @@ unsigned int	coloring(int i)
 	unsigned char	blue;
 
 	blue = (i * 0) % 255;
-	green = (i * 40) % 255;
+	green = (i * 4) % 255;
 	red = (i * 0) % 255;
 	return (red << 16 | green << 8 | blue);
 }
 
-double	change_range(double num, double new_min, double new_max, double old_min, double old_max)
+double	mapping(double num, double old_min, double old_max)
 {
 	double	new;
+	double	new_min;
+	double	new_max;
+
+	new_min = -2;
+	new_max = 2;
 	new = (new_max - new_min) * (num - old_min) / (old_max - old_min) + new_min;
 	return (new);
 }
@@ -35,11 +40,10 @@ void	equation_checker(int x, int y, t_mlx_data *data)
 
 	i = 0;
 	data->out = 4;
-	data->iter = 42;
-	z.x = 0;
-	z.y = 0;
-	c.x = change_range(x, -2, 2, 0, W * data->zoom);
-	c.y = change_range(y, -2, 2, 0, H * data->zoom);
+	data->iter = 420;
+	z.x = mapping(x, 0, W * data->zoom);
+	z.y = mapping(y, 0, H * data->zoom);
+	m_or_j(&c, &z, data);
 	while (i < data->iter)
 	{
 		z = sum(square(z), c);
